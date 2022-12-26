@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import PropTypes from 'prop-types';
@@ -22,10 +21,8 @@ const initialValues = {
 };
 
 export default class ContactForm extends Component {
-  contactId = nanoid();
-  contactNameId = nanoid();
-  contactNumberIid = nanoid();
-
+  contactId = this.props.onGetId();
+ 
   handleFormSubmit = (values, { resetForm }) => {
     this.props.onSubmitForm(values);
 
@@ -43,7 +40,7 @@ export default class ContactForm extends Component {
           <Label htmlFor={this.contactId}>
             Name
             <Input
-              placeholder="Jhon Snow"
+              placeholder="John Snow"
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"

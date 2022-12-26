@@ -21,7 +21,7 @@ export const theme = {
     button: '150px',
     form: '350px',
     input: '250px',
-    wrapper: '250px',
+    wrapper: '300px',
   },
 
   fontSizes: {
@@ -43,6 +43,7 @@ export const theme = {
     none: 'none',
     normal: '1px solid',
     bold: '3px solid',
+    active: "2px solid"
   },
   radii: {
     none: '0',

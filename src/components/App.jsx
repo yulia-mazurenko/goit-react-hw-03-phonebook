@@ -10,6 +10,8 @@ import {
   Wrapper,
 } from '../components/Titles/Titles.styled';
 
+const LOCALE_STORAGE_KEY= 'contacts-list';
+
 export class App extends Component {
   state = {
     contacts: [
@@ -21,10 +23,28 @@ export class App extends Component {
     filter: '',
   };
 
-  contactId = nanoid();
+  componentDidMount(){
+
+    if(this.state.contacts !==[]) {
+      const savedContacts = JSON.parse(localStorage.getItem(LOCALE_STORAGE_KEY));
+      this.setState({contacts: savedContacts})
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState){
+   const prevListContacts=prevState.contacts;
+   const nextListContacts=this.setState.contacts;
+
+    if( nextListContacts!== prevListContacts) {
+      localStorage.setItem(LOCALE_STORAGE_KEY, JSON.stringify(this.state.contacts))
+    }
+  }
+
+  getId =()=> nanoid();
 
   addContact = ({ name, number }) => {
     const { contacts } = this.state;
+
     if (contacts.some(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
       return;
@@ -32,7 +52,7 @@ export class App extends Component {
 
     const contact = {
       name,
-      id: this.contactId,
+      id: this.getId(),
       number,
     };
 
@@ -68,7 +88,7 @@ export class App extends Component {
     return (
       <Wrapper>
         <PhoneBookTitle>PhoneBook</PhoneBookTitle>
-        <ContactForm onSubmitForm={this.addContact} />
+        <ContactForm onSubmitForm={this.addContact} onGetId={this.getId}/>
         <ListTitle>Contacts</ListTitle>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList

@@ -11,7 +11,7 @@ export const InputFilter = styled.input`
   width: ${p => p.theme.sizes.input};
   box-sizing: border-box;
   border: ${p => p.theme.borders.normal};
-  border-color: ${p => p.theme.colors.secondary};
+  border-color: ${p => p.theme.colors.accentColor};
   border-radius: ${p => p.theme.radii.normal};
   font-family: ${p => p.theme.fonts.body};
 
@@ -19,6 +19,7 @@ export const InputFilter = styled.input`
   &:hover,
   &:active {
     outline: 0;
-    border-color: ${p => p.theme.colors.accentColor};
+    border: ${p => p.theme.borders.active};
+    border-color: ${p => p.theme.colors.secondary};
   }
 `;
