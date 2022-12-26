@@ -25,8 +25,9 @@ export class App extends Component {
 
   componentDidMount(){
 
-    if(this.state.contacts !==[]) {
-      const savedContacts = JSON.parse(localStorage.getItem(LOCALE_STORAGE_KEY));
+    const savedContacts = JSON.parse(localStorage.getItem(LOCALE_STORAGE_KEY));
+    
+    if(savedContacts) {
       this.setState({contacts: savedContacts})
     }
   }
@@ -75,8 +76,11 @@ export class App extends Component {
   };
 
   getFilteredContacts = () => {
+
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
+    console.log(contacts)
+
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
